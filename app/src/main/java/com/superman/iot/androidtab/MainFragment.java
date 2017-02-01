@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -28,6 +29,7 @@ public class MainFragment extends Fragment {
     ViewPagerAdapter viewPagerAdapter;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -64,13 +66,14 @@ public class MainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView= inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         viewPager = (ViewPager) rootView.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
 
         tabLayout = (TabLayout) rootView.findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
+        setupTabIcons();
         return rootView;
     }
 
@@ -79,5 +82,14 @@ public class MainFragment extends Fragment {
         adapter.addFragment(new Tab1Fragment(), "ONE");
         adapter.addFragment(new Tab2Fragment(), "TWO");
         viewPager.setAdapter(adapter);
+    }
+
+    private void setupTabIcons() {
+//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_launcher);
+//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_launcher);
+        View tabOne = LayoutInflater.from(getActivity()).inflate(R.layout.custom_tab,null);
+//        tabOne.setText("ONE");
+//        tabOne.setCompoundDrawablesWithIntrinsicBounds(0, R.drawable.ic_launcher, 0, 0);
+        tabLayout.getTabAt(0).setCustomView(tabOne);
     }
 }
